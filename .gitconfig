@@ -1,0 +1,30 @@
+[alias]
+  co = checkout
+  ec = config --global -e
+  up = !git pull --rebase --prune upstream master
+  cob = checkout -b
+  cm = !git add -A && git commit -m
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  wip = !git add -u && git commit -m "WIP"
+  undo = reset HEAD~1 --mixed
+  amend = commit -a --amend
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+  bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+  week = !git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago'
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  upm = !git checkout master && git pull --rebase upstream master && git push origin master
+  track = update-index --no-assume-unchanged
+  untrack = update-index --assume-unchanged
+  ls-untrack = !sh -c 'git ls-files -v | grep "^[[:lower:]]"'
+[user]
+  email = <email-goes-here>
+  name = Nick
+[filter "lfs"]
+  clean = git lfs clean %f
+  smudge = git lfs smudge %f
+  required = true
+[push]
+  default = current
+[core]
+  editor = nvim

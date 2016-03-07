@@ -1,2 +1,2 @@
-# dotfiles
-My collection of dotfiles
+# DotFiles
+DRY :)
